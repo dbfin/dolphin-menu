@@ -1,0 +1,48 @@
+#!/bin/bash --
+
+tmp=/tmp/meld_compare
+
+files=()
+save=0
+hex=0
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -s)
+            shift
+            save=1
+            ;;
+        -r)
+            shift
+            if [[ -f $tmp ]]; then
+				files=( "${files[@]}" `cat $tmp` )
+            fi
+            ;;
+		-x)
+			shift
+			hex=1
+			;;
+        *)
+			files=( "${files[@]}" "'$(readlink -f "$1")'" )
+            shift
+            ;;
+    esac
+done
+
+if [[ $save -eq 1 ]]; then
+    echo -n "${files[@]}" > $tmp
+    exit $?
+fi
+
+if [[ $hex -eq 1 ]]; then
+	files_=()
+	for f in "${files[@]}"; do
+		b="/tmp/$(eval basename $f)"
+		while [[ -e "$b" ]]; do b="$b "; done
+		eval xxd $f >"$b"
+		files_=( "${files_[@]}" "'$b'" )
+	done
+	eval meld ${files_[@]}
+else
+	eval meld ${files[@]}
+fi
