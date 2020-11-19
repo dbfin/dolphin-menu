@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+MimeType=application/pdf;
+Actions=TwoByOne;
+#X-KDE-Priority=Actions
+X-KDE-Priority=TopLevel
+#X-KDE-Submenu=Compare
+
+[Desktop Action TwoByOne]
+Name=2 pages on each page
+Icon=distribute-horizontal-page
+Exec=pdfjam --nup 2x1 --landscape -- %U
