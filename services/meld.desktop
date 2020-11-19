@@ -19,16 +19,16 @@ Icon=meld
 Exec=meld_compare -s %U
 
 [Desktop Action CS]
-Name=Compare saved to this file
+Name=Compare to saved
 Icon=meld
 Exec=meld_compare -r %U
 
 [Desktop Action CX]
-Name=Compare hex files
+Name=Compare hex
 Icon=meld
 Exec=meld_compare -x %U
 
 [Desktop Action CXS]
-Name=Compare hex saved to this file
+Name=Compare hex to saved
 Icon=meld
 Exec=meld_compare -x -r %U
